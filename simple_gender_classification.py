@@ -4,6 +4,8 @@ from sklearn.linear_model import SGDClassifier #Stochastic Gradient Descent SGD
 from sklearn import svm
 from sklearn import linear_model
 from sklearn import neighbors
+from sklearn.metrics import accuracy_score
+import numpy as np
 
 # Input data
 # [height, weight, shoe size]
@@ -30,29 +32,42 @@ clf2 = clf2.fit(X,Y)
 clf3 = clf3.fit(X,Y)
 clf4 = clf4.fit(X, Y)
 
-#Predicting
 
-prediction = clf.predict([[190, 70, 43]])
-prediction1 = clf1.predict([[190,70,43]])
-prediction2 = clf2.predict([[190,70,43]])
-prediction3 = clf3.predict([[190,70,43]])
-prediction4 = clf4.predict([[190,70,43]])
+# Checking the accuracy of decision tree
+prediction = clf.predict(X)
+acc_decision_tree = accuracy_score(prediction,Y)*100
 
-print ("Decision_Tree:",prediction)
-print ("Stochastic Gradient Descent:", prediction1)
-print ("Gaussian NB:", prediction2)
-print ("Support Vector Machines:", prediction3)
-print ("KNeighborsClassifier:", prediction4)
 
-accuracy = max(prediction, prediction1, prediction2, prediction3, prediction4)
+#Checking the accuracy of Stochastic Gradient Descent
 
-if accuracy == prediction :
-    print("The most accurate model is: Decision tree")
-elif accuracy == prediction1 :
-    print("The most accurate model is: Stochastic Gradient Descents")
-elif accuracy == prediction2 :
-    print("The most accurate model is: Gaussian NB")
-elif accuracy == prediction3 :
-    print("The most accurate model is: Support Vector Machines.SVC")
-elif accuracy == prediction4 :
-    print ("The most accurate model is: KNeighbors Classifiers")
+prediction1 = clf1.predict(X)
+acc_SGD = accuracy_score(prediction1,Y)* 100
+
+#Checking the accuracy of Gaussian NB
+prediction2 = clf2.predict(X)
+acc_GNB = accuracy_score(prediction2, Y)*100
+
+
+#Checking the accuracy of Support Vector Machines
+prediction3 = clf3.predict(X)
+acc_SVM = accuracy_score(prediction3, Y)*100
+
+
+#Checking the accuracy of KNeighbors
+prediction4 = clf4.predict(X)
+acc_KN = accuracy_score(prediction4, Y)*100
+
+
+#Determining the best classifier among all
+
+accurate = np.argmax([acc_decision_tree,acc_SGD, acc_GNB, acc_SVM, acc_KN])
+classification = {0:'Decision_Tree', 1:'Stochastic_Gradient_Descent', 2: 'GaussianNB', 3:'SVM', 4:'KNeighbors'}
+print ('Accuracy for the decision tree:', acc_decision_tree)
+print ('Accuracy of Stochastic-Gradient-Descent:', acc_SGD)
+print ("Accuracy of Gaussian NB : ", acc_GNB)
+print ("Accuracy of SVM :", acc_SVM)
+print ('Accuracy of KNeighbors: ', acc_KN)
+
+
+print ('The most accurate gender classifier is:', classification[accurate])
+print ('Thank you ')
