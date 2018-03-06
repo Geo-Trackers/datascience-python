@@ -1,2 +1,2 @@
-# datascience-python
-A set of python scripts for data science and machine learning applications. 
+# Machine-Learning using Python
+A set of python scripts for simple machine learning applications.
