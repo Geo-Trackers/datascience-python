@@ -1,2 +1,3 @@
 # Machine-Learning using Python
-A set of python scripts for simple machine learning applications.
+
+A set of python scripts using scikit-learn for simple machine learning applications. 
